@@ -817,6 +817,15 @@ runtimeu, ne tezinama. joint08 + rewrite = 9B v2.0 kandidat.
 Sljedeci trening (joint14) ide SAMO na confirmation/safety, nikad vise
 na HL/prose-first.
 
+## 9B v2.0 FREEZE POTVRDJEN: joint08 loop v06 (2026-11-22)
+Preostali dokaz naknadno odradjen: merged-joint08 -> Q8 (q8-joint08,
+smoke pass) -> LOOP v06 (63, rewrite aktivan): tool 0.912, args 1.0,
+conf 0.8, HL 0.889, multi 1.0, safety 1.0, refusal 1.0, task 0.952,
+strict 0.873. Na ISTOM bencu tuce joint14 u svakoj kategoriji
+(0.824/0.7/0.909) i 2B r6 u tool/tasku (0.882/0.841); jedini gap
+ostaje conf 0.8 < 2B 0.9. File: results_agentloop_9bjoint08_v06.json.
+9B SE ZAMRZAVA na joint08 + rewrite — bez nove hipoteze nema novih runova.
+
 ## 9B joint14 SPEC: v48 izgradjen, ceka GPU odobrenje (2026-11-20)
 `scripts/build_joint14_9b.py` (seed 47): baza v0.41 (1850) + 200
 confirmation SA alatom (ask + read-only check, ne prose-only) + 100
