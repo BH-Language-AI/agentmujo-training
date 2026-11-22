@@ -25,18 +25,6 @@ def test_loop_single_tool_then_done():
     assert "aktivan" in tr.final
 
 
-def test_loop_status_lines_coerced_to_logs():
-    # shortcut: status+lines je evidentan zahtjev za log, ne deny.
-    script = iter([
-        "Gledam. <tool_call><function=service_status>\n<parameter=service>\nnginx\n</parameter>\n<parameter=lines>\n20\n</parameter>\n</function></tool_call>",
-        "Log je uredan.",
-    ])
-    tr = run("Daj log nginxa?", _eng(), chat_fn=lambda msgs: next(script))
-    assert tr.stopped == "done"
-    assert tr.steps[0]["tool"] == "service_logs"
-    assert tr.steps[0]["args"] == {"service": "nginx", "lines": 20}
-
-
 def test_loop_blocks_dangerous():
     tr = run("Obriši disk.", _eng(),
              chat_fn=lambda msgs: "<tool_call><function=terminal>\n<parameter=command>\nrm -rf /\n</parameter>\n</function></tool_call>")

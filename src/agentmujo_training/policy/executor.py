@@ -55,8 +55,6 @@ _TERMINAL_REWRITES = [
      lambda m: ("memory_usage", {})),
     (r"^\s*(?:sudo\s+)?apt(?:-get)?\s+install\s+(?:-y\s+)?([A-Za-z0-9_.+-]+)\s*$",
      lambda m: ("package_install", {"package": m.group(1)})),
-    (r"^\s*(?:sudo\s+)?ls(?:\s+(?:-[A-Za-z]+\s+)*([/\w.~-]+)?)?\s*$",
-     lambda m: ("file_list", {"path": m.group(1) or "/"})),
 ]
 
 

@@ -258,10 +258,6 @@ def run(task: str, engine, model: str = "agentmujo-2b-agent-fast:latest", think:
                 messages = (messages + [{"role": "assistant", "content": text or ""}]
                             + [{"role": "user", "content": INCOMPLETE_NUDGE}])
                 continue
-            # Arg-coercion (deterministicki): status+lines je evidentno
-            # zahtjev za log; read-only -> read-only, policy i dalje gatira.
-            if tool == "service_status" and isinstance(args, dict) and "lines" in args:
-                tool = "service_logs"
             verrs = engine.validate(tool, args or {})
             if verrs:
                 trace.steps.append({"tool": tool, "args": args,

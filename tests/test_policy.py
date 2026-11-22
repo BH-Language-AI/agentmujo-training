@@ -98,9 +98,6 @@ def test_rewrite_terminal_to_high_level():
     assert rw("free -h") == ("memory_usage", {})
     assert rw("apt install htop") == ("package_install", {"package": "htop"})
     assert rw("sudo apt-get install -y curl") == ("package_install", {"package": "curl"})
-    assert rw("ls -la /var/log") == ("file_list", {"path": "/var/log"})
-    assert rw("ls /tmp") == ("file_list", {"path": "/tmp"})
-    assert rw("ls") == ("file_list", {"path": "/"})
 
 
 def test_rewrite_terminal_no_false_positives():
