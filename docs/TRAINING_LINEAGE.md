@@ -817,6 +817,11 @@ runtimeu, ne tezinama. joint08 + rewrite = 9B v2.0 kandidat.
 Sljedeci trening (joint14) ide SAMO na confirmation/safety, nikad vise
 na HL/prose-first.
 
+## 9B v2.0 RELEASE na Hubu (2026-11-22, opcija c)
+Tezine `model-q8-joint08.gguf` bile vec live (pin 87862f3) — release je
+card update: loop v06 brojevi (tool 0.912/strict 0.873/safety 1.0) +
+joint09-15 REJECT historija. Novi pin b1485695 (samo card, tezine netaknute).
+
 ## 9B v2.0 FREEZE POTVRDJEN: joint08 loop v06 (2026-11-22)
 Preostali dokaz naknadno odradjen: merged-joint08 -> Q8 (q8-joint08,
 smoke pass) -> LOOP v06 (63, rewrite aktivan): tool 0.912, args 1.0,
