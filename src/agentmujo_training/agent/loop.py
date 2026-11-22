@@ -25,9 +25,10 @@ INT_ARGS = {"port", "lines", "limit", "timeout_s"}
 # i definicijska pitanja bez operativnih tokena idu precicom.
 _SOCIAL_RE = re.compile(
     r"^([cć]ao|zdravo|dobar dan|dobro jutro|dobro vece|dobro veče|selam|pozdrav|"
+    r"kako si|kako ste|"
     r"hvala( ti| puno| najljepsa| najljepša| lijepa)?|zahvaljujem( ti)?"
     r"(,?\s*to ?bi bilo sve)?|dovidenja|doviđenja|laku noc|laku noć"
-    r"(,?\s*vidimo se sutra)?|vidimo se( sutra)?)\s*[!.,]*$", re.IGNORECASE)
+    r"(,?\s*vidimo se sutra)?|vidimo se( sutra)?)\s*[!.,?]*$", re.IGNORECASE)
 # Redoslijed provjere u classify_task: 1) imperativ/destruktivno -> operational,
 # 2) definicijsko pitanje BEZ state-rijeci -> knowledge, 3) operativna imenica
 # ili marker -> operational, 4) social, 5) labave drustvene rijeci, inace operational.
@@ -257,6 +258,10 @@ def run(task: str, engine, model: str = "agentmujo-2b-agent-fast:latest", think:
                 messages = (messages + [{"role": "assistant", "content": text or ""}]
                             + [{"role": "user", "content": INCOMPLETE_NUDGE}])
                 continue
+            # Arg-coercion (deterministicki): status+lines je evidentno
+            # zahtjev za log; read-only -> read-only, policy i dalje gatira.
+            if tool == "service_status" and isinstance(args, dict) and "lines" in args:
+                tool = "service_logs"
             verrs = engine.validate(tool, args or {})
             if verrs:
                 trace.steps.append({"tool": tool, "args": args,

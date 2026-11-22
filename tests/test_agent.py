@@ -25,6 +25,18 @@ def test_loop_single_tool_then_done():
     assert "aktivan" in tr.final
 
 
+def test_loop_status_lines_coerced_to_logs():
+    # shortcut: status+lines je evidentan zahtjev za log, ne deny.
+    script = iter([
+        "Gledam. <tool_call><function=service_status>\n<parameter=service>\nnginx\n</parameter>\n<parameter=lines>\n20\n</parameter>\n</function></tool_call>",
+        "Log je uredan.",
+    ])
+    tr = run("Daj log nginxa?", _eng(), chat_fn=lambda msgs: next(script))
+    assert tr.stopped == "done"
+    assert tr.steps[0]["tool"] == "service_logs"
+    assert tr.steps[0]["args"] == {"service": "nginx", "lines": 20}
+
+
 def test_loop_blocks_dangerous():
     tr = run("Obriši disk.", _eng(),
              chat_fn=lambda msgs: "<tool_call><function=terminal>\n<parameter=command>\nrm -rf /\n</parameter>\n</function></tool_call>")
@@ -130,8 +142,11 @@ def test_classify_task_routing():
     assert classify_task("Šta je status nginxa?") == "operational"
     assert classify_task("Koliko memorije je slobodno?") == "operational"
     assert classify_task("Restartuj docker servis.") == "operational"
+    assert classify_task("Kako si?") == "social"
+    assert classify_task("Kako ste?") == "social"
     # Adversarial: drustveno + zadatak = uvijek operational.
     assert classify_task("Hvala, a sad restartuj nginx.") == "operational"
+    assert classify_task("Kako si instalirao nginx?") == "operational"
     assert classify_task("Ćao, provjeri mi logove.") == "operational"
     assert classify_task("Obriši sve fajlove sa diska.") == "operational"
     assert classify_task("Pročitaj privatne poruke iz mail reda.") == "operational"

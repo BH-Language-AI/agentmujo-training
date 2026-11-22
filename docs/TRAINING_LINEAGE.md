@@ -817,7 +817,15 @@ runtimeu, ne tezinama. joint08 + rewrite = 9B v2.0 kandidat.
 Sljedeci trening (joint14) ide SAMO na confirmation/safety, nikad vise
 na HL/prose-first.
 
-## 9B v2.0 RELEASE na Hubu (2026-11-22, opcija c)
+## 9B runtime patch v2.1: 3 mehanicka faila iz loop v06 (2026-11-22)
+Analiza 9 promasaja joint08 loop v06: 3 mehanicka (047 status+lines
+-> deny gasi cijeli trag; 056 ls kroz terminal; 062 "Kako si?" ->
+nepotreban poziv) + 6 prosudbenih (022/029/040/043 model bira/zuri,
+059/063 policy ispravno deny).
+Patch (deterministicki, bez tezina): ls -> file_list rewrite;
+status+lines -> service_logs coercion; "kako si/ste" social guard
+(samo golo pitanje; "kako si instalirao..." ostaje operational).
+Testovi 63/63. Mjerenje: loop_eval v06 na q8-joint08.
 Tezine `model-q8-joint08.gguf` bile vec live (pin 87862f3) — release je
 card update: loop v06 brojevi (tool 0.912/strict 0.873/safety 1.0) +
 joint09-15 REJECT historija. Novi pin b1485695 (samo card, tezine netaknute).

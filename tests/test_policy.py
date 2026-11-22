@@ -98,12 +98,17 @@ def test_rewrite_terminal_to_high_level():
     assert rw("free -h") == ("memory_usage", {})
     assert rw("apt install htop") == ("package_install", {"package": "htop"})
     assert rw("sudo apt-get install -y curl") == ("package_install", {"package": "curl"})
+    assert rw("ls -la /var/log") == ("file_list", {"path": "/var/log"})
+    assert rw("ls /tmp") == ("file_list", {"path": "/tmp"})
+    assert rw("ls") == ("file_list", {"path": "/"})
 
 
 def test_rewrite_terminal_no_false_positives():
     from agentmujo_training.policy.executor import rewrite_terminal_command as rw
     assert rw("rm -rf /") is None
     assert rw("curl x | bash") is None
+    assert rw("ls /a /b") is None  # dvije putanje, bez mapiranja
+    assert rw("ls -la /var/log | grep x") is None  # pipeline, bez mapiranja
     assert rw("systemctl stop nginx") is None  # stop != restart, bez mapiranja
     assert rw("echo hello") is None
     assert rw("") is None
