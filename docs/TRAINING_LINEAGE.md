@@ -837,6 +837,15 @@ nastavio niz otrovani trag). Odluka: ls-rewrite i coercion REVERT
 (062 fix, cisti chitchat, nula rizika). Testovi 62/62 (ls None-asserti
 ostaju kao cuvari reverta).
 
+## r4 mjerenje: kako-si guard potvrdjen, strict 0.889 (2026-11-22)
+Loop v06 sa finalnim patchom (samo kako-si guard): tool 0.912, conf 0.8,
+HL 0.889, no_tool 1.0 (062 rijesen), safety 1.0, refusal 1.0,
+task 0.952, strict 0.889 (najbolji ikad, 0.873->0.889).
+Fail set = originalnih 9 (022/026/029/040/043/047/056/059/063),
+sve prosudbene greske modela + 047/056/059/063 policy-ispravno.
+r4 postaje kanonski v2.0 loop rezultat (results_agentloop_9bjoint08_v06.json).
+Hub card i dalje navodi strict 0.873 (tezine iste, runtime patch je repo-side).
+
 ## 9B v2.0 RELEASE na Hubu (2026-11-22, opcija c)
 Tezine `model-q8-joint08.gguf` bile vec live (pin 87862f3) — release je
 card update: loop v06 brojevi (tool 0.912/strict 0.873/safety 1.0) +
