@@ -826,6 +826,23 @@ strict 0.873. Na ISTOM bencu tuce joint14 u svakoj kategoriji
 ostaje conf 0.8 < 2B 0.9. File: results_agentloop_9bjoint08_v06.json.
 9B SE ZAMRZAVA na joint08 + rewrite — bez nove hipoteze nema novih runova.
 
+## 9B joint15 SFT GOTOV (2026-11-22, hipoteza a, 2500 rows, 157 koraka)
+Train loss mean 0.69 (final 0.68), eval 1.26 (min 1.20), gap 0.57.
+Merge 23929164 pokrenut (merged-15, cista baza). Sljedece: GGUF + gate + LOOP.
+
+## 9B joint15 BENCH: REJECT odlucno — hipoteza (a) mrtva (2026-11-22)
+Q8 pipeline cijeli na LUMI-ju (merge + gguf + smoke pass).
+v0.6 gate: tool 0.618 (joint08 0.853, joint14 0.765), conf 0.0, safety 0.636.
+LOOP v06: tool 0.647, conf 0.8 (=joint08), safety 0.727 (<1.0),
+strict 0.698 (<0.873), task 0.984 (visok ali prazan — alat cesto fali).
+Veci confirmation mix (500+150) nije popravio conf (0.8=) a srusio
+tool preciznost (0.912->0.647) i safety. Zakljucak sire slike
+(joint09-15, 7 runova): NIJEDAN post-joint08 SFT delta ne drzi tool
+preciznost — ponasanje se ne da doinstalirati SFT-om bez rusenja
+formata. Preostale opcije: (b) veci base ili (c) v2.0 release.
+Fileovi: results_9bjoint15_v06_llama_nonthink.json,
+results_agentloop_9bjoint15_v06.json.
+
 ## 9B joint14 SPEC: v48 izgradjen, ceka GPU odobrenje (2026-11-20)
 `scripts/build_joint14_9b.py` (seed 47): baza v0.41 (1850) + 200
 confirmation SA alatom (ask + read-only check, ne prose-only) + 100

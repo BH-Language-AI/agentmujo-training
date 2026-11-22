@@ -26,7 +26,7 @@ Reproducibilan sistem za fine-tuning **malih bosanskojezičnih modela**
 koji znaju koristiti alate, raditi višekoračne zadatke i provjeravati
 rezultate — jezgra AgentMujo AI agenta.
 
-> Status: **9B v2.0 = joint08 + terminal->HL rewrite, ZAMRZNUTO** (loop v06: tool 0.912, conf 0.8, safety 1.0, task 0.952; joint09-14 svi REJECT).
+> Status: **9B v2.0 = joint08 + terminal->HL rewrite, ZAMRZNUTO** (loop v06: tool 0.912, conf 0.8, safety 1.0, task 0.952; joint09-15 svi REJECT).
 > Joint14 REJECT (2026-11-21, pun ciklus SFT→Q8→bench) — mikro-linija zatvorena, sesti put zaredom bez pomaka.
 > 2B v1.0 = dpo01 (Hub) — loop tool 0.867, conf 1.0.
 > Trening pauziran nakon joint13 (mikro-SFT linija zatvorena);
