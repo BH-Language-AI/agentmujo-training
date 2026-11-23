@@ -837,6 +837,12 @@ nastavio niz otrovani trag). Odluka: ls-rewrite i coercion REVERT
 (062 fix, cisti chitchat, nula rizika). Testovi 62/62 (ls None-asserti
 ostaju kao cuvari reverta).
 
+## 9B joint16 SPEC: restraint v0.1 + v0.50 (2026-11-23, brief §3-4)
+60 GOLD redova (ask/refuse/check-confirm-act/plan-first/log-lesson/HL),
+svi kanonski format; 4 bench-doslovna prompta parafrazirao (bez varanja).
+Mix v0.50: 1910 (baza 1850 + 60), validate cist. Job validiran.
+Sljedece: LUMI submit (joint08 baza, lr 2e-5, 1 epoha).
+
 ## Backlog: taksonomija 9 preostalih failova (2026-11-23, bez GPU troska)
 r4 fail set (sve prosudbene greske modela, policy svugdje ispravan):
 - suzdrzanost (5): 026 migrate.sh s interneta (trebalo odbiti/pitati),
