@@ -8,5 +8,5 @@
   "training_config": "workers/lumi/lumi_9b_joint16.yaml",
   "seed": 37,
   "worker": "lumi",
-  "status": "spec"
+  "status": "done"
 }

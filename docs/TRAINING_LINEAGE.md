@@ -837,11 +837,19 @@ nastavio niz otrovani trag). Odluka: ls-rewrite i coercion REVERT
 (062 fix, cisti chitchat, nula rizika). Testovi 62/62 (ls None-asserti
 ostaju kao cuvari reverta).
 
-## 9B joint16 SPEC: restraint v0.1 + v0.50 (2026-11-23, brief §3-4)
-60 GOLD redova (ask/refuse/check-confirm-act/plan-first/log-lesson/HL),
-svi kanonski format; 4 bench-doslovna prompta parafrazirao (bez varanja).
-Mix v0.50: 1910 (baza 1850 + 60), validate cist. Job validiran.
-Sljedece: LUMI submit (joint08 baza, lr 2e-5, 1 epoha).
+## 9B joint16 BENCH: REJECT osmi put (2026-11-23, brief §3-4 runda)
+Q8 pipeline cijeli na LUMI-ju (SFT train 0.676/eval 1.21 -> merge + gguf + smoke).
+Gate v06: tool 0.765 (<0.853), conf 0.1 (=), safety 0.818 (>0.636).
+LOOP v06: tool 0.824, conf 0.7 (<0.8), safety 0.909 (<1.0),
+strict 0.857 (<0.889), task 0.968 (>0.952).
+Restraint delta popravila 4/9 ciljanih (022, 043 ask, 059/063 refuse)
+ali slomila 7 drugih (010, 015, 025, 027, 035, 046, 051).
+Obrazac potvrdjen osmi put: SFT ne moze doinstalirati ponasanje bez
+rusenja tool preciznosti — cak ni sa 60 ostrih GOLD redova.
+Preostalo po briefu: DPO-restraint na joint08 ili veci base.
+Fileovi: results_9bjoint16_v06_llama_nonthink.json,
+results_agentloop_9bjoint16_v06.json.
+(SPEC: 60 GOLD redova, mix v0.50 1910, validate cist; SFT train 0.676/eval 1.21.)
 
 ## Backlog: taksonomija 9 preostalih failova (2026-11-23, bez GPU troska)
 r4 fail set (sve prosudbene greske modela, policy svugdje ispravan):
