@@ -1,0 +1,72 @@
+{
+  "job_id": "qwen35-9b-lumi-dpo17",
+  "created_at": "2026-11-23T19:24:59+00:00",
+  "base_model": "Qwen/Qwen3.5-9B",
+  "base_revision": "c20223623576",
+  "dataset": "local",
+  "dataset_revision": null,
+  "training_config": "workers/lumi/lumi_9b_dpo17.yaml",
+  "seed": 37,
+  "worker": "lumi",
+  "status": "done",
+  "config": {
+    "experiment_id": "qwen35-9b-lumi-dpo17",
+    "mode": "dpo",
+    "model_name": "Qwen/Qwen3.5-9B",
+    "model_revision": "c20223623576",
+    "base_adapter": "/scratch/project_465003647/agentmujo/training/jobs/qwen35-9b-lumi-joint08/outputs/adapter",
+    "dataset": "local",
+    "data_file": "/scratch/project_465003647/agentmujo/dpo_9b_restraint01.jsonl",
+    "split": "train",
+    "max_samples": null,
+    "output_dir": "/scratch/project_465003647/agentmujo/outputs/9b-dpo-17",
+    "max_seq_length": 1024,
+    "max_prompt_length": 1024,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "learning_rate": 5e-06,
+    "num_train_epochs": 3,
+    "warmup_ratio": 0.05,
+    "weight_decay": 0.0,
+    "logging_steps": 1,
+    "save_steps": 5,
+    "save_total_limit": 1,
+    "gradient_checkpointing": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "optim": "paged_adamw_8bit",
+    "loss_type": "sigmoid",
+    "seed": 37,
+    "beta": 0.1
+  },
+  "metrics": {
+    "mode": "dpo",
+    "train_loss": 0.4262281358242035,
+    "train_loss_mean": 0.6151757819785012,
+    "eval": {
+      "note": "DPO reward/loss ovdje; bench na Oracleu nakon mergea"
+    }
+  },
+  "finished_at": "2026-11-23T19:30:44+00:00",
+  "env": {
+    "python": "3.12.3",
+    "torch": "2.11.0+rocm7.2_lumi_aif_20261028104748",
+    "cuda": null,
+    "gpu": "AMD Instinct MI250X",
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "trl": "1.14.2",
+    "accelerate": "1.15.0",
+    "datasets": "5.1.0"
+  }
+}

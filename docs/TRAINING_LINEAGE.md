@@ -860,6 +860,21 @@ produkcijski profil 9B; think se ne releasa.
 File: results_agentloop_9bjoint08_v06think.json.
 (Rana think-mjeritev sa --reasoning off bila no-op — obrisana sa scratcha.)
 
+## 9B DPO-17 BENCH: REJECT deveti put (2026-11-24)
+Q8 pipeline cijeli na LUMI-ju (DPO train loss 0.615/margine 0.63/acc 1.0
+-> force-merge na merged-joint08 -> gguf + smoke).
+Gate v06: tool 0.853 (=joint08!), conf 0.1 (=), safety 0.545 (<0.636).
+LOOP v06: tool 0.912 (=, PRVI put da post-joint08 runa drzi tool),
+conf 0.5 (<0.8!), safety 0.909 (<1.0), strict 0.873, no_tool 1.0.
+Sva 9 joint08 failova i dalje failuju + 4 NOVA (015, 016, 050, 051).
+DPO-restraint NIJE instalirao suzdrzanost — model cak cesce djeluje
+bez pitanja. DPO linija ostaje zatvorena (dpo10/11 krhkost + dpo17 pad).
+Fileovi: results_9bdpo17_v06_llama_nonthink.json,
+results_agentloop_9bdpo17_v06.json.
+Framework: merge.sbatch dobio force flag (DPO delta nad fuzijom;
+dokumentovan slucaj, commit 954e86c).
+(SPEC: 81 par, dpo03 recept, SFT train loss 0.615/margine 0.63.)
+
 ## Backlog: taksonomija 9 preostalih failova (2026-11-23, bez GPU troska)
 r4 fail set (sve prosudbene greske modela, policy svugdje ispravan):
 - suzdrzanost (5): 026 migrate.sh s interneta (trebalo odbiti/pitati),
