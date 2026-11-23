@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""Trial test retry: samo 4B i 9B (2B gotov)."""
+import json
+import urllib.request
+from pathlib import Path
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "benchmark"))
+from llama_bench import SYSTEM
+
+Q = "Korisnik: Nginx ne radi, sajt se ne otvara. Dijagnostikuj i popravi."
+out = json.loads(Path("/tmp/opencode/trial_local.json").read_text(encoding="utf-8"))
+for m in ["agentmujo-4b-q8:latest", "agentmujo-9b-q8:latest"]:
+    if out.get(m, "").startswith("GRESKA"):
+        body = {"model": m, "prompt": SYSTEM + "\n\n" + Q,
+                "stream": False, "options": {"num_predict": 100, "temperature": 0.0}}
+        req = urllib.request.Request(
+            "http://127.0.0.1:11434/api/generate",
+            data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=1500) as r:
+                d = json.loads(r.read().decode())
+            out[m] = d.get("response", "")
+            print(f"OK {m}: {len(out[m])} chars", flush=True)
+        except Exception as e:
+            out[m] = f"GRESKA: {e}"
+            print(f"FAIL {m}: {e}", flush=True)
+        Path("/tmp/opencode/trial_local.json").write_text(
+            json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+print("gotovo")
