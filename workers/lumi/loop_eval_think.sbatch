@@ -8,8 +8,10 @@
 #SBATCH --mem=32G
 #SBATCH --time=04:00:00
 #SBATCH --output=amj-loopthink-%j.out
-# LUMI scored loop eval: llama-server (CPU, Q8) + benchmark/agent_eval.py.
-# Upotreba: sbatch loop_eval.sbatch <model-q8.gguf> <cases.jsonl> <out.json>
+# LUMI scored loop eval, THINK profil: llama-server BEZ --reasoning off
+# (reasoning auto; enable_thinking:true iz agent_eval.py) + benchmark/agent_eval.py.
+# Sadrzaj ostaje kanonski tool-call, reasoning_content je pravi trace (dokazano probom).
+# Upotreba: sbatch loop_eval_think.sbatch <model-q8.gguf> <cases.jsonl> <out.json>
 # (agent_eval podrzava URL kao model: chat_llama fn.)
 set -euo pipefail
 MODEL="${1:?upotreba: sbatch loop_eval.sbatch <model-q8.gguf> <cases> <out>}"
@@ -26,7 +28,6 @@ export SINGULARITYENV_AGENTMJO_SYSTEM_EXTRA="$PROFILE"
 LLAMACPP_BIN="$(dirname "$MODEL")/llama.cpp/build/bin"
 cd "$REPO" && git pull -q 2>/dev/null || echo "WARN: git pull nije uspio"
 "$LLAMACPP_BIN/llama-server" -m "$MODEL" --port 8899 -c 4096 \
-  --reasoning off \
   --n-gpu-layers 0 -t 32 > "$(dirname "$OUT")/loopeval_server.log" 2>&1 &
 SRV=$!
 for i in $(seq 1 60); do
