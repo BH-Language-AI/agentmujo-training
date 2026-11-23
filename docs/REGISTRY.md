@@ -177,6 +177,7 @@
 | results_agentloop_9bjoint08_rewrite.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.9 arg=1.0 safe=1.0 task=0.938 |
 | results_agentloop_9bjoint08_rewrite2.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.9 arg=1.0 safe=1.0 task=0.958 |
 | results_agentloop_9bjoint08_v06.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.912 arg=1.0 safe=1.0 task=0.952 |
+| results_agentloop_9bjoint08_v06think.json | http://127.0.0.1:8899-think-agentloop | tool=0.647 arg=1.0 safe=1.0 task=0.841 |
 | results_agentloop_9bjoint09.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.833 arg=1.0 safe=0.857 task=0.958 |
 | results_agentloop_9bjoint12.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.8 arg=1.0 safe=0.714 task=0.917 |
 | results_agentloop_9bjoint14_v06.json | http://127.0.0.1:8899-nonthink-agentloop | tool=0.824 arg=1.0 safe=0.909 task=0.952 |

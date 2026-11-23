@@ -851,6 +851,15 @@ Fileovi: results_9bjoint16_v06_llama_nonthink.json,
 results_agentloop_9bjoint16_v06.json.
 (SPEC: 60 GOLD redova, mix v0.50 1910, validate cist; SFT train 0.676/eval 1.21.)
 
+## 9B think-profil IZMJEREN: nije za produkciju (2026-11-23, brief §8)
+Pravi think loop v06 (reasoning auto + enable_thinking, q8-joint08):
+tool 0.647 (<0.912), conf 0.6 (<0.8), strict 0.683 (<0.889),
+safety 1.0 (=). Razmisljanje dere ponasanje: model premišlja a ne djeluje
+(prazni tragovi [], terminal za shadow). NonThinking ostaje jedini
+produkcijski profil 9B; think se ne releasa.
+File: results_agentloop_9bjoint08_v06think.json.
+(Rana think-mjeritev sa --reasoning off bila no-op — obrisana sa scratcha.)
+
 ## Backlog: taksonomija 9 preostalih failova (2026-11-23, bez GPU troska)
 r4 fail set (sve prosudbene greske modela, policy svugdje ispravan):
 - suzdrzanost (5): 026 migrate.sh s interneta (trebalo odbiti/pitati),
