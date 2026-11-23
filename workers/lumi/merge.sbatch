@@ -16,11 +16,15 @@
 #   lozu -> brbljanje/hallucinirani alati (vidjeno joint10/joint11, 2026-11-19).
 #   baza zadana (npr. merged-joint07) -> SAMO DPO adapteri trenirani nad
 #   merge_and_unload modelom (vidi job_run.py:409); DPO LoRA je svjeza delta.
+#   force=1 (5. arg) preskace lineage slug provjeru — samo uz dokaz:
+#   DPO delta nad merge_and_unload fuzijom (adapter_config nosi pred-fuzijsko
+#   ime baze pa slug ne moze proci; dokazano ista fuzija: cista baza + isti adapter).
 set -euo pipefail
-ADAPTER="${1:?upotreba: sbatch merge.sbatch <adapter-dir> <revision> <out-dir> [baza]}"
+ADAPTER="${1:?upotreba: sbatch merge.sbatch <adapter-dir> <revision> <out-dir> [baza] [force]}"
 REVISION="${2:-}"
-OUTDIR="${3:?upotreba: sbatch merge.sbatch <adapter-dir> <revision> <out-dir> [baza]}"
+OUTDIR="${3:?upotreba: sbatch merge.sbatch <adapter-dir> <revision> <out-dir> [baza] [force]}"
 BASE="${4:-Qwen/Qwen3.5-9B}"
+FORCE="${5:-}"
 module purge
 module load Local-LAIF lumi-aif-singularity-bindings
 export SIF=/appl/local/laifs/containers/lumi-multitorch-latest.sif
@@ -34,5 +38,5 @@ git pull -q 2>/dev/null || echo "WARN: git pull nije uspio"
 srun --unbuffered singularity exec -B "$REPO:/repo" -B /scratch:/scratch "$SIF" \
   env PYTHONPATH="$PYLIBS" python -u /repo/quantization/merge_adapter.py \
     --base "$BASE" ${REVISION:+--revision "$REVISION"} \
-    --adapter "$ADAPTER" --out "$OUTDIR"
+    --adapter "$ADAPTER" --out "$OUTDIR" ${FORCE:+--force}
 echo MERGE_DONE
