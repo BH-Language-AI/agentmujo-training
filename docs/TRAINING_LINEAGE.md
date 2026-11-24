@@ -875,6 +875,18 @@ Framework: merge.sbatch dobio force flag (DPO delta nad fuzijom;
 dokumentovan slucaj, commit 954e86c).
 (SPEC: 81 par, dpo03 recept, SFT train loss 0.615/margine 0.63.)
 
+## FINALNO SPREMANJE (2026-11-24, kraj treninga)
+GitHub: sve commitano/pushano (81 dataset fajl ranije + pinovi).
+Hub: joint v0.44-49 + dpo +7 fajlova uploadano; svi dataset repoi
+kompletni; modeli 2B/4B/9B na pinovima; adapteri sampiona
+(9b-joint08 116MB, 2b-dpo01 44MB) uploadani u agentmujo-adapters
+(putanje 9b-joint08/adapter/*, 2b-dpo01/adapter/*, integritet verifikovan).
+Scratch: obrisano ~470GB REJECT lanca (merged/q8-10..16, dpo17,
+stari joint07-13/dpo14-16/09e mergovi, checkpointovi); ostaju SAMO
+sampion-tezine (merged-joint08, q8-joint08, 2B mergovi), svi adapteri,
+dataseti i bench evidencija. Lokalno: pycache/test kes brisan, /tmp cist.
+2B v1.0 + 4B v0.4 + 9B v2.0 ZAMRZNUTO I OBJAVLJENO. Kraj.
+
 ## Backlog: taksonomija 9 preostalih failova (2026-11-23, bez GPU troska)
 r4 fail set (sve prosudbene greske modela, policy svugdje ispravan):
 - suzdrzanost (5): 026 migrate.sh s interneta (trebalo odbiti/pitati),
