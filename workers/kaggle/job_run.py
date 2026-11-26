@@ -175,6 +175,10 @@ def _train_lora(cfg: dict, out: Path) -> dict:
     import inspect as _inspect
 
     tok = AutoTokenizer.from_pretrained(cfg["model_name"], trust_remote_code=True)
+    if cfg.get("chat_template"):  # baze bez templatea (npr. Salamandra): forsiraj iz configa
+        tok.chat_template = cfg["chat_template"]
+    if tok.pad_token is None:  # Salamandra base nema pad -> eos (standardno)
+        tok.pad_token = tok.eos_token
     # Eksplicitni json load preko hf:// (deterministicki, imun na repo builder
     # inference razlike medju verzijama datasets liba); fallback na repo stil.
     from datasets import load_dataset
@@ -307,6 +311,10 @@ def _train_full(cfg: dict, out: Path) -> dict:
     import inspect as _inspect
 
     tok = AutoTokenizer.from_pretrained(cfg["model_name"], trust_remote_code=True)
+    if cfg.get("chat_template"):  # baze bez templatea (npr. Salamandra): forsiraj iz configa
+        tok.chat_template = cfg["chat_template"]
+    if tok.pad_token is None:  # Salamandra base nema pad -> eos (standardno)
+        tok.pad_token = tok.eos_token
     repo, rev = cfg["dataset"], cfg.get("dataset_revision") or "main"
     data_glob = cfg.get("data_file", "data/*.jsonl")
     if data_glob.startswith(("file://", "/")):
@@ -395,6 +403,10 @@ def _train_dpo(cfg: dict, out: Path) -> dict:
                   "Odgovaraj na bosanskom jeziku (ijekavica). "
                   "Za zadatke sa alatom odgovori kanonskim formatom.")
     tok = AutoTokenizer.from_pretrained(cfg["model_name"], trust_remote_code=True)
+    if cfg.get("chat_template"):  # baze bez templatea (npr. Salamandra): forsiraj iz configa
+        tok.chat_template = cfg["chat_template"]
+    if tok.pad_token is None:  # Salamandra base nema pad -> eos (standardno)
+        tok.pad_token = tok.eos_token
     repo, rev = cfg["dataset"], cfg.get("dataset_revision") or "main"
     data_glob = cfg.get("data_file", "data/*.jsonl")
     if data_glob.startswith(("file://", "/")):
